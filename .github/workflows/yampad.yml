@@ -17,19 +17,23 @@ jobs:
       config_path: yampad
       archive_name: yampad-firmware
 
-  yampad-store:
-    if: always()
+  yampad-release:
     needs: yampad-build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v4
     - uses: actions/download-artifact@v4
       with:
-        path: yampad
+        path: firmware
         merge-multiple: true
-    - uses: sylvanld/action-storage@v1
+    - name: Publish firmware as a rolling release
+      uses: softprops/action-gh-release@v2
       with:
-        src: yampad
-        dst: ./
-        storage-branch: main
+        tag_name: yampad-firmware
+        name: Yampad Firmware (latest)
+        body: |
+          Latest Yampad ZMK firmware, built automatically from `main`.
+          Wireless (BLE) variants for nice!nano and Mikoto.
+        files: firmware/*.uf2
     

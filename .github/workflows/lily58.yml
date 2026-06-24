@@ -17,18 +17,22 @@ jobs:
       config_path: lily58
       archive_name: lily58-firmware
         
-  lily58-store:
-    if: always()
+  lily58-release:
     needs: lily58-build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v4
     - uses: actions/download-artifact@v4
       with:
-        path: lily58
+        path: firmware
         merge-multiple: true
-    - uses: sylvanld/action-storage@v1
+    - name: Publish firmware as a rolling release
+      uses: softprops/action-gh-release@v2
       with:
-        src: lily58
-        dst: ./
-        storage-branch: main
+        tag_name: lily58-firmware
+        name: Lily58 Firmware (latest)
+        body: |
+          Latest Lily58 ZMK firmware, built automatically from `main`.
+          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto.
+        files: firmware/*.uf2

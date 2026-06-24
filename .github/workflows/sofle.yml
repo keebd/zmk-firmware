@@ -17,19 +17,23 @@ jobs:
       config_path: sofle
       archive_name: sofle-firmware
 
-  sofle-store:
-    if: always()
+  sofle-release:
     needs: sofle-build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v4
     - uses: actions/download-artifact@v4
       with:
-        path: sofle
+        path: firmware
         merge-multiple: true
-    - uses: sylvanld/action-storage@v1
+    - name: Publish firmware as a rolling release
+      uses: softprops/action-gh-release@v2
       with:
-        src: sofle
-        dst: ./
-        storage-branch: main
+        tag_name: sofle-firmware
+        name: Sofle Firmware (latest)
+        body: |
+          Latest Sofle ZMK firmware, built automatically from `main`.
+          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto.
+        files: firmware/*.uf2
     

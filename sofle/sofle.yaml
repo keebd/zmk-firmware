@@ -1,48 +1,71 @@
 ---
+# artifact-name sets the exact .uf2 base name (used verbatim by ZMK's
+# build-user-config). Kept clean/URL-safe (no spaces or @) so the files
+# publish as tidy GitHub Release assets and the docs links stay stable,
+# independent of the Zephyr 4.1 board id (nice_nano//zmk, mikoto@7.2//zmk).
 include:
+  # --- Wireless (BLE) ---
   - board: nice_nano//zmk
     shield: sofle_left
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_right
+    artifact-name: sofle_right-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_left nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_display-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_right nice_view_adapter nice_view
+    artifact-name: sofle_right_display-nice_nano_v2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_left
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_right
+    artifact-name: sofle_right-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_left nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_display-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_right nice_view_adapter nice_view
-  # Wired UART split variants (inter-half comms over TRRS data wires, not BLE).
-  # Separate firmware from the wireless builds above — flash one set or the other.
+    artifact-name: sofle_right_display-mikoto_7.2-zmk
+  # --- Wired UART (inter-half comms over TRRS data wires, not BLE) ---
   - board: nice_nano//zmk
     shield: sofle_left wired
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_wired-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_right wired
+    artifact-name: sofle_right_wired-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_left nice_view_adapter nice_view wired
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_display_wired-nice_nano_v2-zmk
   - board: nice_nano//zmk
     shield: sofle_right nice_view_adapter nice_view wired
+    artifact-name: sofle_right_display_wired-nice_nano_v2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_left wired
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_wired-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_right wired
+    artifact-name: sofle_right_wired-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_left nice_view_adapter nice_view wired
     snippet: studio-rpc-usb-uart
+    artifact-name: sofle_left_display_wired-mikoto_7.2-zmk
   - board: mikoto@7.2//zmk
     shield: sofle_right nice_view_adapter nice_view wired
+    artifact-name: sofle_right_display_wired-mikoto_7.2-zmk
+  # --- Settings reset ---
   - board: nice_nano//zmk
     shield: settings_reset
+    artifact-name: settings_reset-nice_nano_v2-zmk
   - board: mikoto@7.2//zmk
     shield: settings_reset
+    artifact-name: settings_reset-mikoto_7.2-zmk

@@ -18,18 +18,21 @@ jobs:
       archive_name: corne-firmware
 
   draw:
+    # Render the keymap diagram and publish it as an artifact (the SVG is added
+    # to the release below). west_config_path must point at the folder holding
+    # west.yml so module includes resolve; we keep west.yml per-keyboard.
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
-    permissions:
-      contents: write  # allow workflow to commit to the repo
     with:
-      keymap_patterns: "corne/corne.keymap"        # path to the keymaps to parse
-      config_path: "keymap_drawer.config.yaml"  # config file, ignored if not exists
-      output_folder: "corne"            # path to save produced SVG and keymap YAML files
-      parse_args: ""  # map of extra args to pass to `keymap parse`, e.g. "corne:'-l Def Lwr Rse' cradio:''"
-      draw_args: ""   # map of extra args to pass to `keymap draw`, e.g. "corne:'-k corne_rotated' cradio:'-k paroxysm'"
+      keymap_patterns: "corne/corne.keymap"
+      config_path: "keymap_drawer.config.yaml"
+      west_config_path: "corne"
+      output_folder: "."
+      destination: "artifact"
+      artifact_name: "corne-keymap"
+      fail_on_error: false
 
   corne-release:
-    needs: corne-build
+    needs: [corne-build, draw]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -38,12 +41,15 @@ jobs:
       with:
         path: firmware
         merge-multiple: true
-    - name: Publish firmware as a rolling release
+    - name: Publish firmware + keymap diagram as a rolling release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: corne-firmware
         name: Corne Firmware (latest)
         body: |
           Latest Corne ZMK firmware, built automatically from `main`.
-          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto.
-        files: firmware/*.uf2
+          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto,
+          plus the rendered keymap diagram (corne.svg).
+        files: |
+          firmware/*.uf2
+          firmware/*.svg

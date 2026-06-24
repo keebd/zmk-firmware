@@ -1,0 +1,21 @@
+/*
+ * Add-on shield: full-duplex wired UART split transport.
+ *
+ * Stacked on top of the lily58_left / lily58_right shields, e.g.
+ *   shield: lily58_left wired
+ *
+ * Uses the Pro-Micro interconnect's predefined UART (&pro_micro_serial),
+ * available on both nice_nano_v2 and mikoto. Full-duplex requires both
+ * data conductors (TX/RX) routed through the TRRS connector.
+ */
+
+&pro_micro_serial {
+    status = "okay";
+};
+
+/ {
+    wired_split {
+        compatible = "zmk,wired-split";
+        device = <&pro_micro_serial>;
+    };
+};

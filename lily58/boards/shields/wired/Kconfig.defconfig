@@ -1,0 +1,8 @@
+if SHIELD_WIRED
+
+# Inter-half comms go over the wire, not BLE. Host connectivity (USB/BLE)
+# is unaffected. Only one split transport can be active per build.
+config ZMK_SPLIT_BLE
+    default n
+
+endif

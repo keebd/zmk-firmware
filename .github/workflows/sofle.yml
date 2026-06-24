@@ -17,8 +17,19 @@ jobs:
       config_path: sofle
       archive_name: sofle-firmware
 
+  draw:
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    with:
+      keymap_patterns: "sofle/sofle.keymap"
+      config_path: "keymap_drawer.config.yaml"
+      west_config_path: "sofle"
+      output_folder: "."
+      destination: "artifact"
+      artifact_name: "sofle-keymap"
+      fail_on_error: false
+
   sofle-release:
-    needs: sofle-build
+    needs: [sofle-build, draw]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,13 +38,16 @@ jobs:
       with:
         path: firmware
         merge-multiple: true
-    - name: Publish firmware as a rolling release
+    - name: Publish firmware + keymap diagram as a rolling release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: sofle-firmware
         name: Sofle Firmware (latest)
         body: |
           Latest Sofle ZMK firmware, built automatically from `main`.
-          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto.
-        files: firmware/*.uf2
+          Includes Wireless (BLE) and Wired (UART) variants for nice!nano and Mikoto,
+          plus the rendered keymap diagram (sofle.svg).
+        files: |
+          firmware/*.uf2
+          firmware/*.svg
     

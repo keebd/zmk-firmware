@@ -1,18 +1,18 @@
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: yampad
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: yampad nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: yampad
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: yampad nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: settings_reset
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: settings_reset

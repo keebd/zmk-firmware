@@ -1,48 +1,48 @@
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_left
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_right
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_left nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_right nice_view_adapter nice_view
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_left
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_right
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_left nice_view_adapter nice_view
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_right nice_view_adapter nice_view
   # Wired UART split variants (inter-half comms over TRRS data wires, not BLE).
   # Separate firmware from the wireless builds above — flash one set or the other.
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_left wired
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_right wired
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_left nice_view_adapter nice_view wired
     snippet: studio-rpc-usb-uart
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_right nice_view_adapter nice_view wired
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_left wired
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_right wired
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_left nice_view_adapter nice_view wired
     snippet: studio-rpc-usb-uart
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: lily58_right nice_view_adapter nice_view wired
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: settings_reset
-  - board: mikoto@7.2
+  - board: mikoto@7.2//zmk
     shield: settings_reset

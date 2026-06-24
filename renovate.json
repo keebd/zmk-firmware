@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": [
+    "dependencies",
+    "zmk"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track the pinned zmkfirmware/zmk revision in each keyboard's west.yml",
+      "managerFilePatterns": [
+        "/(^|/)west\\.yml$/"
+      ],
+      "matchStrings": [
+        "-\\s*name:\\s*zmk[\\s\\S]*?revision:\\s*(?<currentDigest>[0-9a-f]{40})"
+      ],
+      "currentValueTemplate": "main",
+      "depNameTemplate": "zmkfirmware/zmk",
+      "packageNameTemplate": "https://github.com/zmkfirmware/zmk",
+      "datasourceTemplate": "git-refs"
+    }
+  ],
+  "git-refs": {
+    "schedule": [
+      "before 6am on monday"
+    ]
+  }
+}
